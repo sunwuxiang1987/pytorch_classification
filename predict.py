@@ -14,6 +14,7 @@ from collections import Counter
 import cfg
 from data import tta_test_transform, get_test_transform
 
+
 def load_checkpoint(filepath):
     checkpoint = torch.load(filepath)
     model = checkpoint['model']  # 提取网络结构
@@ -28,7 +29,7 @@ def predict(model):
     # 读入模型
     model = load_checkpoint(model)
     print('..... Finished loading model! ......')
-    ##将模型放置在gpu上运行
+    # 将模型放置在gpu上运行
     if torch.cuda.is_available():
         model.cuda()
     pred_list, _id = [], []
@@ -53,7 +54,7 @@ def tta_predict(model):
     # 读入模型
     model = load_checkpoint(model)
     print('..... Finished loading model! ......')
-    ##将模型放置在gpu上运行
+    # 将模型放置在gpu上运行
     if torch.cuda.is_available():
         model.cuda()
     pred_list, _id = [], []
@@ -79,10 +80,9 @@ def tta_predict(model):
 
 
 if __name__ == "__main__":
-
     trained_model = cfg.TRAINED_MODEL
     model_name = cfg.model_name
-    with open(cfg.TEST_LABEL_DIR,  'r')as f:
+    with open(cfg.TEST_LABEL_DIR, 'r')as f:
         imgs = f.readlines()
 
     # _id, pred_list = tta_predict(trained_model)
@@ -91,6 +91,3 @@ if __name__ == "__main__":
     submission = pd.DataFrame({"ID": _id, "Label": pred_list})
     submission.to_csv(cfg.BASE + '{}_submission.csv'
                       .format(model_name), index=False, header=False)
-
-
-

@@ -37,11 +37,11 @@
             |--*.jpg
         ...
 
-    |-- val
+    |-- test
         |--*.jpg
 ```
 
-利用preprocess.py将数据集格式进行转换（个人习惯这种数据集的方式）
+利用preprocess.py将数据集格式进行转换（个人习惯这种数据集的方式）test本人理解为测试集，从train的各个分类中随意添加部分
 
 ```
 python ./data/preprocess.py
@@ -58,6 +58,10 @@ python ./data/preprocess.py
 # val.txt
 
 /home/xxx/data/train/label1/*.jpg
+
+# test.txt
+
+/home/xxx/data/test/*.jpg
 ```
 
 ```
@@ -71,10 +75,11 @@ python ./data/preprocess.py
             |--*.jpg
         ...
 
-    |-- val
+    |-- test
         |--*.jpg
     |--train.txt
     |--val.txt
+    |--test.txt
 ```
 
 
@@ -84,6 +89,8 @@ python ./data/preprocess.py
 efficientnet来自于 https://github.com/lukemelas/EfficientNet-PyTorch
 
 ### 训练
+
+* 在/models/__init__.py修改模型的home路径
 
 * 在`cfg.py`中修改合适的参数，并在train.py中选择合适的模型
 
@@ -114,7 +121,12 @@ SAVE_FOLDER = './weights'
 model_name = 'resnext101_32x32d'
 ```
 
-1. 直接利用训练数据集进行训练
+1. 直接利用训练数据集进行训练,开始前需要在data/weights下载好resnext101_32x32.pth
+
+下载连接：https://download.pytorch.org/models/ig_resnext101_32x32-e4b90b00.pth
+
+修改models/init.py中
+LOCAL_PRETRAINED = {'resnext101_32x32d': '/you model path***/ig_resnext101_32x32-e4b90b00.pth',}
 ```shell
 python train.py
 ```

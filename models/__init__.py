@@ -1,6 +1,5 @@
-import os
-home = os.path.expanduser('~')
-## 预训练模型的存放位置
+home = "D:/py_project/pytorch_classification/data"
+# 预训练模型的存放位置
 LOCAL_PRETRAINED = {
     'resnext101_32x8d': home + '/weights/resnext101_32x8.pth',
     'resnext101_32x16d': home + '/weights/resnext101_32x16.pth',
