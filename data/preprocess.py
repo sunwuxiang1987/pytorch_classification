@@ -10,7 +10,7 @@ if __name__ == '__main__':
     traindata_path = cfg.BASE + 'train'
     labels = os.listdir(traindata_path)
     print(labels)
-    valdata_path = cfg.BASE + 'test'
+    testdata_path = cfg.BASE + 'test'
     # 写train.txt文件
     txtpath = cfg.BASE
     # print(labels)
@@ -33,7 +33,7 @@ if __name__ == '__main__':
                 f.write(img + ' ' + str(index))
                 f.write('\n')
 
-    imglist = glob.glob(os.path.join(valdata_path, '*.jpg'))
+    imglist = glob.glob(os.path.join(testdata_path, '*.jpg'))
     with open(txtpath + 'test.txt', 'a')as f:
         for img in imglist:
             f.write(img)
